@@ -422,6 +422,9 @@ tr:hover td { background: var(--primary-lt); }
 .pkg-tier   { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; color: var(--primary); }
 .pkg-header h3 { font-family: var(--font-head); font-size: 22px; color: var(--dark); margin-bottom: 4px; }
 .pkg-header p  { font-size: 13px; color: var(--muted); }
+  .pkg-price { margin-top: 12px; }
+.pkg-price .price-range { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: var(--primary); }
+.pkg-price .price-label { font-size: 12px; color: var(--muted); display: block; margin-top: 2px; }
 .pkg-body { padding: 24px 28px; }
 .pkg-includes { list-style: none; padding: 0; margin-bottom: 20px; }
 .pkg-includes li { font-size: 14px; padding: 7px 0; display: flex; gap: 10px; align-items: flex-start; border-bottom: 1px solid var(--border); color: var(--mid); }
@@ -1052,7 +1055,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
         </div>
         <div class="pkg-card popular reveal" style="transition-delay:0.1s">
           <div class="popular-badge">Most Popular</div>
-          <div class="pkg-header"><div class="pkg-tier">Plan B</div><h3>Enhanced</h3><p>Comprehensive gap coverage</p></div>
+          <div class="pkg-header"><div class="pkg-tier">Plan B</div><h3>Enhanced</h3><p>Comprehensive gap coverage</p><div class="pkg-price"><span class="price-range">$260–$335</span><span class="price-label">Est. monthly cost</span></div></div>
           <div class="pkg-body">
             <ul class="pkg-includes">
               <li><i class="fa-solid fa-check-circle pi"></i>Medicare Supplement (Plan G or N)</li>
@@ -1064,7 +1067,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
           </div>
         </div>
         <div class="pkg-card reveal" style="transition-delay:0.15s">
-          <div class="pkg-header"><div class="pkg-tier">Plan C</div><h3>Complete</h3><p>Maximum protection package</p></div>
+          <div class="pkg-header"><div class="pkg-tier">Plan C</div><h3>Complete</h3><p>Maximum protection package</p><div class="pkg-price"><span class="price-range">$325–$400</span><span class="price-label">Est. monthly cost</span></div></div>
           <div class="pkg-body">
             <ul class="pkg-includes">
               <li><i class="fa-solid fa-check-circle pi"></i>Medicare Supplement (Plan G or N)</li>
@@ -1081,7 +1084,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
     <div class="pkg-set" id="pkg-adv">
       <div class="pkg-grid">
         <div class="pkg-card reveal" style="transition-delay:0.05s">
-          <div class="pkg-header"><div class="pkg-tier">Plan A</div><h3>Essential</h3><p>Core supplemental protection</p></div>
+          <div class="pkg-header"><div class="pkg-tier">Plan A</div><h3>Essential</h3><p>Core supplemental protection</p><div class="pkg-price"><span class="price-range">$25–$60</span><span class="price-label">Est. monthly cost</span></div></div>
           <div class="pkg-body">
             <ul class="pkg-includes">
               <li><i class="fa-solid fa-check-circle pi"></i>Medicare Advantage with Part D</li>
@@ -1093,7 +1096,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
         </div>
         <div class="pkg-card popular reveal" style="transition-delay:0.1s">
           <div class="popular-badge">Most Popular</div>
-          <div class="pkg-header"><div class="pkg-tier">Plan B</div><h3>Enhanced</h3><p>Double layer of protection</p></div>
+          <div class="pkg-header"><div class="pkg-tier">Plan B</div><h3>Enhanced</h3><p>Double layer of protection</p><div class="pkg-price"><span class="price-range">$50–$100</span><span class="price-label">Est. monthly cost</span></div></div>
           <div class="pkg-body">
             <ul class="pkg-includes">
               <li><i class="fa-solid fa-check-circle pi"></i>Medicare Advantage with Part D</li>
@@ -1104,7 +1107,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
           </div>
         </div>
         <div class="pkg-card reveal" style="transition-delay:0.15s">
-          <div class="pkg-header"><div class="pkg-tier">Plan C</div><h3>Complete</h3><p>Full supplemental coverage</p></div>
+          <div class="pkg-header"><div class="pkg-tier">Plan C</div><h3>Complete</h3><p>Full supplemental coverage</p><div class="pkg-price"><span class="price-range">$115–$165</span><span class="price-label">Est. monthly cost</span></div></div>
           <div class="pkg-body">
             <ul class="pkg-includes">
               <li><i class="fa-solid fa-check-circle pi"></i>Medicare Advantage with Part D</li>
