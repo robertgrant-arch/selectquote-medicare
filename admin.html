@@ -24,58 +24,23 @@
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font-body); color: var(--dark); background: var(--bg); line-height: 1.6; }
-
-#login-screen {
-  position: fixed; inset: 0; z-index: 9999;
-  background: linear-gradient(135deg, #001F22 0%, #004E56 45%, #002E33 100%);
-  display: flex; align-items: center; justify-content: center; padding: 20px;
-}
-.login-card {
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(20px); border-radius: var(--radius-lg);
-  padding: 48px; max-width: 420px; width: 100%; text-align: center;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.4);
-}
+#login-screen { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg, #001F22 0%, #004E56 45%, #002E33 100%); display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: var(--radius-lg); padding: 48px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.4); }
 .login-card h1 { color: white; font-family: var(--font-head); font-size: 26px; margin-bottom: 8px; }
 .login-card p { color: rgba(255,255,255,0.55); font-size: 14px; margin-bottom: 24px; }
-.login-card input {
-  width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;
-  color: white; font-family: var(--font-body); font-size: 15px;
-  outline: none; margin-bottom: 12px;
-}
+.login-card input { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: white; font-family: var(--font-body); font-size: 15px; outline: none; margin-bottom: 12px; }
 .login-card input::placeholder { color: rgba(255,255,255,0.35); }
-.login-card button {
-  width: 100%; padding: 14px; background: var(--orange); border: none;
-  border-radius: 10px; color: white; font-family: var(--font-body);
-  font-size: 16px; font-weight: 600; cursor: pointer;
-}
+.login-card button { width: 100%; padding: 14px; background: var(--orange); border: none; border-radius: 10px; color: white; font-family: var(--font-body); font-size: 16px; font-weight: 600; cursor: pointer; }
 .login-card button:hover { background: var(--orange-dk); }
 .login-error { color: #ff9090; font-size: 13px; margin-top: 8px; display: none; }
-
 #admin-content { display: none; }
-.admin-header {
-  background: white; border-bottom: 1px solid var(--border);
-  padding: 16px 24px; display: flex; align-items: center;
-  justify-content: space-between;
-}
+.admin-header { background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
 .admin-header h1 { font-family: var(--font-head); font-size: 22px; }
 .admin-header a { color: var(--primary); font-size: 14px; font-weight: 600; text-decoration: none; }
 .admin-body { max-width: 1200px; margin: 0 auto; padding: 24px; }
-
 .state-selector { margin-bottom: 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .state-selector label { font-weight: 600; font-size: 14px; }
-.state-selector select {
-  padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px;
-  font-family: var(--font-body); font-size: 14px; min-width: 200px;
-}
-.state-selector button {
-  padding: 10px 20px; background: var(--primary); color: white;
-  border: none; border-radius: 8px; font-weight: 600; cursor: pointer;
-  font-family: var(--font-body);
-}
-.state-selector button:hover { background: var(--primary-dk); }
-
+.state-selector select { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 14px; min-width: 200px; }
 .pkg-section { margin-bottom: 32px; }
 .pkg-section h2 { font-family: var(--font-head); font-size: 20px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary); }
 .pkg-table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 16px; }
@@ -83,26 +48,10 @@ body { font-family: var(--font-body); color: var(--dark); background: var(--bg);
 .pkg-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
 .pkg-table tr:last-child td { border-bottom: none; }
 .pkg-table tr:hover td { background: var(--primary-lt); }
-.pkg-table input {
-  padding: 6px 10px; border: 1.5px solid var(--border); border-radius: 6px;
-  font-family: var(--font-body); font-size: 13px; width: 100px;
-}
-.pkg-table select {
-  padding: 6px 10px; border: 1.5px solid var(--border); border-radius: 6px;
-  font-family: var(--font-body); font-size: 13px;
-}
-
-.save-bar {
-  position: sticky; bottom: 0; background: white; border-top: 1px solid var(--border);
-  padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
-}
+.pkg-table input { padding: 6px 10px; border: 1.5px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 13px; width: 100px; }
+.save-bar { position: sticky; bottom: 0; background: white; border-top: 1px solid var(--border); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -4px 12px rgba(0,0,0,0.06); }
 .save-bar .status { font-size: 14px; color: var(--muted); }
-.save-bar button {
-  padding: 12px 32px; background: var(--orange); color: white; border: none;
-  border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
-  font-family: var(--font-body);
-}
+.save-bar button { padding: 12px 32px; background: var(--orange); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--font-body); }
 .save-bar button:hover { background: var(--orange-dk); }
 .badge { display: inline-block; padding: 2px 8px; border-radius: 50px; font-size: 11px; font-weight: 700; }
 .badge-supp { background: #E8F4F5; color: #00838A; }
@@ -112,10 +61,10 @@ body { font-family: var(--font-body); color: var(--dark); background: var(--bg);
 .add-btn:hover { background: var(--primary); color: white; }
 .del-btn { padding: 4px 10px; background: #fee; color: #e74c3c; border: 1px solid #e74c3c; border-radius: 6px; font-size: 12px; cursor: pointer; }
 .del-btn:hover { background: #e74c3c; color: white; }
+.sthc-note { background: #FFF3CD; border: 1px solid #FFEEBA; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 13px; color: #856404; }
 </style>
 </head>
 <body>
-
 <div id="login-screen">
   <div class="login-card">
     <h1>Admin Panel</h1>
@@ -125,126 +74,114 @@ body { font-family: var(--font-body); color: var(--dark); background: var(--bg);
     <div class="login-error" id="admin-error">Incorrect password.</div>
   </div>
 </div>
-
 <div id="admin-content">
   <div class="admin-header">
     <h1>Product & Package Admin</h1>
     <a href="index.html">&larr; Back to Site</a>
   </div>
-
   <div class="admin-body">
     <div class="state-selector">
       <label>Select State:</label>
       <select id="state-select" onchange="loadState()"></select>
-      <button onclick="addState()">+ Add State</button>
     </div>
-
+    <div id="sthc-note-area"></div>
     <div id="supp-section" class="pkg-section">
       <h2>Medicare Supplement Packages</h2>
       <div id="supp-tables"></div>
     </div>
-
     <div id="adv-section" class="pkg-section">
       <h2>Medicare Advantage Packages</h2>
       <div id="adv-tables"></div>
     </div>
   </div>
-
   <div class="save-bar">
     <span class="status" id="save-status">Unsaved changes</span>
     <button onclick="saveConfig()">Save Configuration</button>
   </div>
 </div>
-
 <script>
-  const ADMIN_PW = '595market';
+const ADMIN_PW = '595market';
 
-const defaultConfig = {
-  KS: {
-    supp: [
-      { tier: 'A', name: 'Essential', products: [
-        { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: '125-200', segment: 'supp' },
-        { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' }
-      ]},
-      { tier: 'B', name: 'Enhanced', products: [
-        { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: '125-200', segment: 'supp' },
-        { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' },
-        { name: 'Dental / Vision / Hearing', carrier: 'Various', premium: '30-50', segment: 'supp' },
-        { name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: '47-65', segment: 'both' }
-      ]},
-      { tier: 'C', name: 'Complete', products: [
-        { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: '125-200', segment: 'supp' },
-        { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' },
-        { name: 'Dental / Vision / Hearing', carrier: 'Various', premium: '30-50', segment: 'supp' },
-        { name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: '47-65', segment: 'both' }
-      ]}
-    ],
-    adv: [
-      { tier: 'A', name: 'Essential', products: [
-        { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
-        { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' }
-      ]},
-      { tier: 'B', name: 'Enhanced', products: [
-        { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
-        { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'adv' },
-        { name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: '47-65', segment: 'both' }
-      ]},
-      { tier: 'C', name: 'Complete', products: [
-        { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
-        { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'adv' },
-        { name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: '47-65', segment: 'both' }
-      ]}
-    ]
-  },
-  MO: {
-    supp: [
-      { tier: 'A', name: 'Essential', products: [
-        { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: '130-210', segment: 'supp' },
-        { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' }
-      ]},
-      { tier: 'B', name: 'Enhanced', products: [
-        { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: '130-210', segment: 'supp' },
-        { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' },
-        { name: 'Dental / Vision / Hearing', carrier: 'Various', premium: '30-50', segment: 'supp' },
-        { name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: '49-68', segment: 'both' }
-      ]},
-      { tier: 'C', name: 'Complete', products: [
-        { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: '130-210', segment: 'supp' },
-        { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' },
-        { name: 'Dental / Vision / Hearing', carrier: 'Various', premium: '30-50', segment: 'supp' },
-        { name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: '49-68', segment: 'both' }
-      ]}
-    ],
-    adv: [
-      { tier: 'A', name: 'Essential', products: [
-        { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
-        { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' }
-      ]},
-      { tier: 'B', name: 'Enhanced', products: [
-        { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
-        { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'adv' },
-        { name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: '49-68', segment: 'both' }
-      ]},
-      { tier: 'C', name: 'Complete', products: [
-        { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
-        { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' },
-        { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'adv' },
-        { name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: '49-68', segment: 'both' }
-      ]}
-    ]
-  }
+// States where short-term medical/health insurance is banned
+const STHC_BANNED_STATES = ['AK','CA','CO','CT','DC','DE','HI','IL','MA','ME','MN','ND','NH','NJ','NM','NY','PA','RI','VT','WA'];
+
+const ALL_STATES = ['AL','AK','AZ','AR','CA','CO','CT','DC','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+
+const STATE_NAMES = {AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DC:'District of Columbia',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming'};
+
+// Medigap premium ranges by state (approximate)
+const STATE_SUPP_PREMIUMS = {
+  AL:'120-195',AK:'180-300',AZ:'115-190',AR:'110-185',CA:'140-240',CO:'130-220',CT:'160-270',DC:'150-250',DE:'140-230',FL:'130-215',GA:'115-195',HI:'145-240',ID:'110-180',IL:'135-225',IN:'115-190',IA:'105-175',KS:'125-200',KY:'115-195',LA:'120-200',ME:'155-260',MD:'140-230',MA:'155-260',MI:'130-215',MN:'135-225',MS:'110-185',MO:'130-210',MT:'125-205',NE:'110-180',NV:'120-200',NH:'150-250',NJ:'150-250',NM:'120-200',NY:'170-300',NC:'115-190',ND:'105-175',OH:'115-190',OK:'110-185',OR:'130-215',PA:'135-225',RI:'155-260',SC:'115-195',SD:'105-175',TN:'115-195',TX:'125-205',UT:'110-180',VT:'160-270',VA:'125-205',WA:'140-230',WV:'120-200',WI:'120-200',WY:'115-195'
 };
 
+// Heartland STHC premium ranges by state
+const STATE_STHC_PREMIUMS = {
+  AL:'45-62',AZ:'48-66',AR:'44-60',FL:'50-70',GA:'46-64',ID:'43-59',IN:'45-62',IA:'42-58',KS:'47-65',KY:'46-63',LA:'48-66',MD:'50-68',MI:'49-67',MS:'44-60',MO:'49-68',MT:'46-63',NE:'43-59',NV:'48-66',NC:'45-62',OH:'45-62',OK:'44-60',OR:'48-66',SC:'45-62',SD:'42-58',TN:'45-62',TX:'47-65',UT:'44-60',VA:'47-65',WV:'44-60',WI:'45-62',WY:'43-59'
+};
+
+function buildStateConfig(st) {
+  const sthcAllowed = !STHC_BANNED_STATES.includes(st);
+  const suppPrem = STATE_SUPP_PREMIUMS[st] || '125-200';
+  const sthcPrem = STATE_STHC_PREMIUMS[st] || '47-65';
+
+  const suppEssential = [
+    { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: suppPrem, segment: 'supp' },
+    { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
+    { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' }
+  ];
+  const suppEnhanced = [
+    { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: suppPrem, segment: 'supp' },
+    { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
+    { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' },
+    { name: 'Dental / Vision / Hearing', carrier: 'Various', premium: '30-50', segment: 'supp' }
+  ];
+  if (sthcAllowed) suppEnhanced.push({ name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: sthcPrem, segment: 'both' });
+  const suppComplete = [
+    { name: 'Medicare Supplement (Plan G or N)', carrier: 'Various', premium: suppPrem, segment: 'supp' },
+    { name: 'Standalone Part D Drug Plan', carrier: 'Various', premium: '15-45', segment: 'supp' },
+    { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'supp' },
+    { name: 'Dental / Vision / Hearing', carrier: 'Various', premium: '30-50', segment: 'supp' }
+  ];
+  if (sthcAllowed) suppComplete.push({ name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: sthcPrem, segment: 'both' });
+
+  const advEssential = [
+    { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
+    { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' }
+  ];
+  const advEnhanced = [
+    { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
+    { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' },
+    { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'adv' }
+  ];
+  if (sthcAllowed) advEnhanced.push({ name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: sthcPrem, segment: 'both' });
+  const advComplete = [
+    { name: 'Medicare Advantage with Part D', carrier: 'Various', premium: '0', segment: 'adv' },
+    { name: 'Hospital Indemnity', carrier: 'Heartland National Life', premium: '25-60', segment: 'adv' },
+    { name: 'Cancer / Heart Attack / Stroke', carrier: 'Various', premium: '25-40', segment: 'adv' }
+  ];
+  if (sthcAllowed) advComplete.push({ name: 'Short-Term Home Healthcare', carrier: 'Heartland National Life', premium: sthcPrem, segment: 'both' });
+
+  return {
+    supp: [
+      { tier: 'A', name: 'Essential', products: suppEssential },
+      { tier: 'B', name: 'Enhanced', products: suppEnhanced },
+      { tier: 'C', name: 'Complete', products: suppComplete }
+    ],
+    adv: [
+      { tier: 'A', name: 'Essential', products: advEssential },
+      { tier: 'B', name: 'Enhanced', products: advEnhanced },
+      { tier: 'C', name: 'Complete', products: advComplete }
+    ]
+  };
+}
+
+const defaultConfig = {};
+ALL_STATES.forEach(st => { defaultConfig[st] = buildStateConfig(st); });
+
 let config = JSON.parse(localStorage.getItem('sq_admin_config') || 'null') || JSON.parse(JSON.stringify(defaultConfig));
+
+// Ensure all states exist in config
+ALL_STATES.forEach(st => { if (!config[st]) config[st] = buildStateConfig(st); });
 
 document.getElementById('admin-pw').addEventListener('keydown', e => { if(e.key==='Enter') checkAdminPw(); });
 
@@ -264,25 +201,21 @@ function populateStates() {
   sel.innerHTML = '';
   Object.keys(config).sort().forEach(st => {
     const o = document.createElement('option');
-    o.value = st; o.textContent = st;
+    o.value = st;
+    o.textContent = st + ' - ' + (STATE_NAMES[st] || st);
     sel.appendChild(o);
   });
-}
-
-function addState() {
-  const st = prompt('Enter 2-letter state code (e.g. TX):');
-  if(!st || st.length !== 2) return;
-  const code = st.toUpperCase();
-  if(config[code]) { alert('State already exists.'); return; }
-  config[code] = JSON.parse(JSON.stringify(config[Object.keys(config)[0]]));
-  populateStates();
-  document.getElementById('state-select').value = code;
-  loadState();
 }
 
 function loadState() {
   const st = document.getElementById('state-select').value;
   if(!st || !config[st]) return;
+  const noteArea = document.getElementById('sthc-note-area');
+  if (STHC_BANNED_STATES.includes(st)) {
+    noteArea.innerHTML = '<div class="sthc-note"><strong>Note:</strong> Short-Term Home Healthcare (STHC) is <strong>not available</strong> in ' + (STATE_NAMES[st] || st) + ' because short-term medical insurance is banned in this state.</div>';
+  } else {
+    noteArea.innerHTML = '';
+  }
   renderPkgTables('supp', config[st].supp, 'supp-tables');
   renderPkgTables('adv', config[st].adv, 'adv-tables');
 }
@@ -330,7 +263,7 @@ function addProd(segment, pi) {
 function saveConfig() {
   localStorage.setItem('sq_admin_config', JSON.stringify(config));
   document.getElementById('save-status').textContent = 'Saved at ' + new Date().toLocaleTimeString();
-  alert('Configuration saved to browser storage. Changes will be reflected on the main site.');
+  alert('Configuration saved to browser storage.');
 }
 </script>
 </body>
