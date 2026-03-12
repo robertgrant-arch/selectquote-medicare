@@ -1448,6 +1448,168 @@ function resetForm(){
   gs.path = null; gs.tier = null;
   document.querySelectorAll('.path-option').forEach(o => o.classList.remove('selected'));
 }
+
+  // ===== ZIP CODE MODAL =====
+(function(){
+  // Create ZIP modal CSS
+  const zipStyle = document.createElement('style');
+  zipStyle.textContent = `
+    #zip-modal { position:fixed; inset:0; z-index:10000; background:linear-gradient(135deg,#001F22 0%,#004E56 45%,#002E33 100%); display:flex; align-items:center; justify-content:center; padding:20px; }
+    .zip-card { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); backdrop-filter:blur(20px); border-radius:20px; padding:48px; max-width:440px; width:100%; text-align:center; box-shadow:0 40px 100px rgba(0,0,0,0.4); animation:fadeInUp 0.6s ease; }
+    .zip-card h2 { color:white; font-family:var(--font-head); font-size:26px; margin-bottom:8px; }
+    .zip-card p { color:rgba(255,255,255,0.55); font-size:14px; margin-bottom:24px; }
+    .zip-card input { width:100%; padding:14px 16px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:white; font-family:var(--font-body); font-size:18px; text-align:center; outline:none; letter-spacing:4px; margin-bottom:12px; }
+    .zip-card input::placeholder { color:rgba(255,255,255,0.35); letter-spacing:1px; }
+    .zip-card button { width:100%; padding:15px; background:var(--orange); border:none; border-radius:10px; color:white; font-family:var(--font-body); font-size:16px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+    .zip-card button:hover { background:var(--orange-dk); transform:translateY(-1px); }
+    .zip-error { color:#ff9090; font-size:13px; margin-top:8px; display:none; }
+    .zip-bar { background:var(--primary); color:white; text-align:center; padding:8px 16px; font-size:13px; font-weight:500; display:none; }
+    .zip-bar span { opacity:0.8; }
+    .zip-bar a { color:white; text-decoration:underline; margin-left:12px; cursor:pointer; font-weight:600; }
+  `;
+  document.head.appendChild(zipStyle);
+
+  // ZIP to state mapping (KS and MO area codes for now)
+  const zipMap = {};
+  // Kansas ZIP ranges
+  for(let i=66002;i<=67954;i++) zipMap[String(i).padStart(5,'0')] = 'KS';
+  // Missouri ZIP ranges
+  for(let i=63001;i<=65899;i++) zipMap[String(i).padStart(5,'0')] = 'MO';
+  // Texas ZIP ranges
+  for(let i=73301;i<=79999;i++) zipMap[String(i).padStart(5,'0')] = 'TX';
+  // Florida ZIP ranges
+  for(let i=32004;i<=34997;i++) zipMap[String(i).padStart(5,'0')] = 'FL';
+
+  const saved = localStorage.getItem('sq_zip_state');
+  if(saved) {
+    showZipBar(JSON.parse(saved));
+    return;
+  }
+
+  // Create modal HTML
+  const modal = document.createElement('div');
+  modal.id = 'zip-modal';
+  modal.innerHTML = `
+    <div class="zip-card">
+      <div style="font-size:48px;color:var(--primary-mid);margin-bottom:16px;opacity:0.9;"><i class="fa-solid fa-location-dot"></i></div>
+      <h2>Enter Your ZIP Code</h2>
+      <p>We'll show plans and pricing available in your area.</p>
+      <input type="text" id="zip-input" placeholder="ZIP Code" maxlength="5" autocomplete="off">
+      <button id="zip-btn">Show My Options</button>
+      <div class="zip-error" id="zip-error">Please enter a valid 5-digit ZIP code in our service area.</div>
+    </div>
+  `;
+  document.body.prepend(modal);
+
+  document.getElementById('zip-btn').addEventListener('click', submitZip);
+  document.getElementById('zip-input').addEventListener('keydown', e => { if(e.key==='Enter') submitZip(); });
+  // Auto-focus
+  setTimeout(()=> document.getElementById('zip-input').focus(), 600);
+
+  function submitZip() {
+    const zip = document.getElementById('zip-input').value.trim();
+    if(!/^\d{5}$/.test(zip)) {
+      document.getElementById('zip-error').style.display = 'block';
+      return;
+    }
+    const state = zipMap[zip];
+    if(!state) {
+      document.getElementById('zip-error').style.display = 'block';
+      document.getElementById('zip-error').textContent = 'We don\'t currently serve this ZIP. Contact us for assistance.';
+      return;
+    }
+    const data = { zip, state };
+    localStorage.setItem('sq_zip_state', JSON.stringify(data));
+    modal.style.transition = 'opacity 0.4s';
+    modal.style.opacity = '0';
+    setTimeout(()=> { modal.remove(); showZipBar(data); }, 400);
+  }
+
+  function showZipBar(data) {
+    const bar = document.createElement('div');
+    bar.className = 'zip-bar';
+    bar.style.display = 'block';
+    bar.innerHTML = `<span>Showing plans for ZIP <strong>${data.zip}</strong> (${data.state})</span><a onclick="localStorage.removeItem('sq_zip_state');location.reload();">Change</a>`;
+    const nav = document.querySelector('nav');
+    if(nav) nav.parentNode.insertBefore(bar, nav);
+    else document.getElementById('site-content').prepend(bar);
+  }
+})();
+
+// ===== HEARTLAND STHC IN ENHANCED PACKAGES =====
+// Patch the pkgDefs to add Short-Term Home Healthcare to Enhanced (B) for both paths
+if(typeof pkgDefs !== 'undefined') {
+  // Add to Med Supp Enhanced if not already there
+  if(pkgDefs.supp && pkgDefs.supp.B && !pkgDefs.supp.B.items.includes('Short-Term Home Healthcare')) {
+    pkgDefs.supp.B.items.push('Short-Term Home Healthcare');
+  }
+  // Add to MA Enhanced if not already there
+  if(pkgDefs.adv && pkgDefs.adv.B && !pkgDefs.adv.B.items.includes('Short-Term Home Healthcare')) {
+    pkgDefs.adv.B.items.push('Short-Term Home Healthcare');
+  }
+}
+
+  // ===== DYNAMIC PACKAGE CARD PATCHING =====
+// After password screen is dismissed, patch the static Enhanced (Plan B) cards
+// to include Short-Term Home Healthcare and update pricing
+const origCheckPassword = checkPassword;
+checkPassword = function() {
+  origCheckPassword.apply(this, arguments);
+  setTimeout(patchEnhancedCards, 600);
+};
+
+function patchEnhancedCards() {
+  // Find all pkg-card elements
+  const cards = document.querySelectorAll('.pkg-card');
+  cards.forEach(card => {
+    const tierEl = card.querySelector('.pkg-tier');
+    const headerH3 = card.querySelector('.pkg-header h3');
+    if(!tierEl || !headerH3) return;
+    const tier = tierEl.textContent.trim();
+    const name = headerH3.textContent.trim();
+    
+    // Target Enhanced (Plan B) cards in both Supp and Adv
+    if(tier === 'Plan B' && name === 'Enhanced') {
+      const list = card.querySelector('.pkg-includes');
+      if(list && !list.innerHTML.includes('Short-Term Home Healthcare')) {
+        const li = document.createElement('li');
+        li.innerHTML = '<span class="pi"><i class="fa-solid fa-house-medical"></i></span> Short-Term Home Healthcare <em style="font-size:11px;color:var(--muted);margin-left:4px;">(Heartland National Life)</em>';
+        list.appendChild(li);
+      }
+      // Update price range to include Heartland STHC premium
+      const priceEl = card.querySelector('.price-range');
+      if(priceEl) {
+        const parent = card.closest('.pkg-set');
+        if(parent && parent.id === 'pkg-supp') {
+          priceEl.textContent = '$295-$385';
+        } else if(parent && parent.id === 'pkg-adv') {
+          priceEl.textContent = '$72-$140';
+        }
+      }
+    }
+  });
+
+  // Also add Heartland carrier note to Complete cards
+  cards.forEach(card => {
+    const items = card.querySelectorAll('.pkg-includes li');
+    items.forEach(li => {
+      if(li.textContent.includes('Short-Term Home Healthcare') && !li.innerHTML.includes('Heartland')) {
+        li.innerHTML += ' <em style="font-size:11px;color:var(--muted);margin-left:4px;">(Heartland National Life)</em>';
+      }
+    });
+  });
+
+  // Add admin link to footer
+  const footer = document.querySelector('.footer-contact');
+  if(footer && !document.getElementById('admin-link')) {
+    const a = document.createElement('a');
+    a.id = 'admin-link';
+    a.href = 'admin.html';
+    a.innerHTML = '<i class="fa-solid fa-gear"></i> Admin Panel';
+    a.style.cssText = 'margin-top:8px;opacity:0.4;font-size:11px;';
+    footer.appendChild(a);
+  }
+}
 </script>
 </body>
 </html>
