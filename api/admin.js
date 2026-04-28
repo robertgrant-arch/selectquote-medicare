@@ -78,7 +78,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const html = readFileSync(join(process.cwd(), 'admin.html'), 'utf-8');
+    const html = readFileSync(join(process.cwd(), '_admin.html'), 'utf-8');
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.end(html);
