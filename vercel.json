@@ -5,7 +5,7 @@
     { "source": "/admin.html", "destination": "/admin", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" }
+    { "source": "/admin", "destination": "/api/admin" }
   ],
   "headers": [
     {
