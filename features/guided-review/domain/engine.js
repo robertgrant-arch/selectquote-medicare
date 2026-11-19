@@ -255,6 +255,9 @@ export function buildPortfolio(p, path, needs, irmaaTier = 0) {
   let tier;
   if (path === 'supp') tier = wants('sthc') ? 'C' : (wants('chs') && wants('dvh') ? 'B' : 'A');
   else tier = wants('sthc') ? 'C' : (wants('hip') && wants('chs') ? 'B' : 'A');
+  const recommendedTier = tier;
+  // Agent / client may choose a different tier; the engine still reports the one it recommended.
+  if (p.tierChoice && PACKAGES[path][p.tierChoice]) tier = p.tierChoice;
   const pkg = PACKAGES[path][tier];
 
   let ancillary = Array.isArray(pkg.ancillary) ? pkg.ancillary.slice() : null;
@@ -280,7 +283,7 @@ export function buildPortfolio(p, path, needs, irmaaTier = 0) {
   const totalHigh = +(bundle[1] + irmaa.partB + partD).toFixed(2);
   const bmax = BUDGET_MAX[p.budget];
   const overBudget = bmax != null && bundle[0] > bmax;
-  return { path, tier, name: pkg.name, products, choiceNote, estimate: { bundle, partB: irmaa.partB, partDSurcharge: partD, totalLow, totalHigh }, overBudget };
+  return { path, tier, recommendedTier, chosen: tier !== recommendedTier, name: pkg.name, products, choiceNote, estimate: { bundle, partB: irmaa.partB, partDSurcharge: partD, totalLow, totalHigh }, overBudget };
 }
 
 function coreReason(k) {

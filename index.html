@@ -638,7 +638,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
       <a href="#not-covered">Gaps</a>
       <a href="#coverage">Coverage Options</a>
       <a href="#packages">Packages</a>
-      <a href="#get-started" class="nav-cta">Start Guided Review</a>
+      <a href="review.html" class="nav-cta">Find My Package</a>
     </div>
     <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
   </div>
@@ -648,7 +648,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
     <a href="#not-covered">What Medicare Doesn't Cover</a>
     <a href="#coverage">Coverage Options</a>
     <a href="#packages">Packages</a>
-    <a href="#get-started">Guided Review</a>
+    <a href="review.html">Find My Package</a>
   </div>
 </nav>
 
@@ -664,7 +664,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
       <div class="hero-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:brandon@greenlightbenefits.com">brandon@greenlightbenefits.com</a></div>
     </div>
     <div class="hero-ctas">
-      <a href="#get-started" class="btn-primary"><i class="fa-solid fa-route"></i> Start Your Guided Review</a>
+      <a href="review.html" class="btn-primary"><i class="fa-solid fa-box-open"></i> Find My Package</a>
       <a href="#medicare" class="btn-outline"><i class="fa-solid fa-book-open"></i> Learn the Basics</a>
     </div>
     <div class="hero-stats">
@@ -1072,7 +1072,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
     <div class="reveal">
       <div class="section-label"><i class="fa-solid fa-layer-group"></i> Recommended Packages</div>
       <h2 class="section-title">Choose Your Bundle</h2>
-      <p class="section-sub">We've designed three comprehensive packages for each coverage path. Not sure which tier fits? The Guided Review recommends one based on your needs analysis.</p>
+      <p class="section-sub">We've designed three comprehensive packages for each coverage path. Not sure which tier fits? <a href="review.html" style="color:var(--primary);font-weight:600;text-decoration:underline">Answer 10 questions</a> and we'll recommend one.</p>
     </div>
     <div class="pkg-tabs">
       <button class="pkg-tab active" onclick="switchPkgTab('supp',this)"><i class="fa-solid fa-file-shield"></i> Medicare Supplement</button>
@@ -1162,17 +1162,7 @@ footer { background: #001518; color: rgba(255,255,255,0.55); padding: 48px 24px;
   </div>
 </section>
 
-<!-- GUIDED REVIEW (education → eligibility → needs analysis → recommended portfolio) -->
-<section id="get-started">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label"><i class="fa-solid fa-route"></i> Guided Medicare Review</div>
-      <h2 class="section-title">Learn, Analyze, and Build Your Coverage</h2>
-      <p class="section-sub">A step-by-step session — on your own or with your licensed agent — that explains how Medicare works, checks your eligibility and timing, analyzes your health, doctors, and budget, and recommends the coverage portfolio that fits.</p>
-    </div>
-    <div id="guided-review-root"><noscript>Please enable JavaScript to use the guided review, or call 913-349-7801.</noscript></div>
-  </div>
-</section>
+<!-- Guided workflow moved to its own page: review.html (features/package-finder) -->
 
 <!-- 3 PHASES -->
 <section id="phases">
@@ -1237,6 +1227,7 @@ document.getElementById('pw-btn').addEventListener('click', checkPassword);
 document.getElementById('pw-input').addEventListener('keydown', e => { if(e.key==='Enter') checkPassword(); });
 function checkPassword(){
   if(document.getElementById('pw-input').value.trim() === '595market'){
+    try { sessionStorage.setItem('sq_access', '1'); } catch(e) {}
     const ps = document.getElementById('password-screen');
     ps.style.transition = 'opacity 0.5s ease';
     ps.style.opacity = '0';
@@ -1282,7 +1273,7 @@ function switchPkgTab(tab, btn){
   document.getElementById('pkg-' + tab).classList.add('active');
 }
 
-// Get Started flow replaced by /features/guided-review (window.selectPackage is provided there).
+// Guided workflow lives on review.html; window.selectPackage is provided by features/package-finder/ui/launcher.js.
 
   // ===== ZIP CODE MODAL =====
 (function(){
@@ -1404,5 +1395,9 @@ function patchEnhancedCards() {
   }
 }
 </script>
-<script type="module" src="features/guided-review/ui/guided-review.js"></script></body>
+<script>
+// Already unlocked this session (e.g. returning from the package review) → skip the password screen.
+try { if (sessionStorage.getItem('sq_access') === '1') { document.getElementById('pw-input').value = '595market'; checkPassword(); } } catch(e) {}
+</script>
+<script type="module" src="features/package-finder/ui/launcher.js"></script></body>
 </html>

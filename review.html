@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicare Package Review | SelectQuote</title>
+<meta name="description" content="Answer 10 questions and get the Medicare package that fits — Supplement or Advantage, Essential, Enhanced, or Complete.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="features/package-finder/ui/package-finder.css">
+</head>
+<body>
+
+<div id="pf-gate" role="dialog" aria-modal="true" aria-labelledby="pf-gate-h">
+  <div class="pf-gate-c">
+    <div class="pf-logo" style="margin:0 auto">SQ</div>
+    <h2 id="pf-gate-h">Medicare Package Review</h2>
+    <p>Enter your access password to continue.</p>
+    <input type="password" id="pf-gate-in" placeholder="Enter password" autocomplete="off">
+    <button type="button" class="pf-btn primary" id="pf-gate-btn">Continue <i class="fa-solid fa-arrow-right"></i></button>
+    <div class="pf-gate-e" id="pf-gate-e" aria-live="polite"></div>
+  </div>
+</div>
+
+<header class="pf-header">
+  <div class="pf-header-in">
+    <a class="pf-brand" href="index.html">
+      <span class="pf-logo">SQ</span>
+      <span><b>SelectQuote</b><span>Medicare Package Review</span></span>
+    </a>
+    <nav class="pf-header-r">
+      <a class="pf-call" href="tel:9133497801"><i class="fa-solid fa-phone"></i><span class="pf-call-l">913-349-7801</span></a>
+      <a href="index.html"><i class="fa-solid fa-book-open"></i><span class="pf-exit-l">Medicare guide</span></a>
+    </nav>
+  </div>
+</header>
+
+<main class="pf-wrap">
+  <div id="pf-root"><noscript>Please enable JavaScript to use the package review, or call 913-349-7801.</noscript></div>
+</main>
+
+<script type="module">
+import { init } from './features/package-finder/ui/package-finder.js';
+// Same lightweight access gate as the main guide; one unlock per browser session covers both pages.
+const KEY = 'sq_access';
+const gate = document.getElementById('pf-gate');
+const unlock = () => { gate.classList.remove('show'); init(); };
+if (sessionStorage.getItem(KEY) === '1') unlock();
+else {
+  gate.classList.add('show');
+  const inp = document.getElementById('pf-gate-in');
+  const tryIt = () => {
+    if (inp.value.trim() === '595market') { sessionStorage.setItem(KEY, '1'); unlock(); }
+    else { document.getElementById('pf-gate-e').textContent = 'Incorrect password. Please try again.'; }
+  };
+  document.getElementById('pf-gate-btn').addEventListener('click', tryIt);
+  inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryIt(); });
+  inp.focus();
+}
+</script>
+</body>
+</html>

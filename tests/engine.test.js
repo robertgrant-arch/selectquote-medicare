@@ -75,3 +75,14 @@ test('API handler returns engine output', async () => {
   assert.equal(j.decision.path, 'adv');
   assert.ok(j.recommended_path);
 });
+
+test('tierChoice prices a different package but keeps the engine recommendation visible', () => {
+  const base = { dob: '1961-08-20', partB: 'enrolled', partBEffective: '2026-08-01', doctorsKeep: 'must', travel: 'frequent',
+    visits: '3-6', budget: '250-400', priorities: ['freedom', 'predictable'], famCancer: 'yes', dental: 'high' };
+  const r = analyze({ ...base, tierChoice: 'C' }, TODAY);
+  assert.equal(r.portfolio.recommendedTier, 'B');
+  assert.equal(r.portfolio.tier, 'C');
+  assert.equal(r.portfolio.chosen, true);
+  assert.ok(r.portfolio.products.some(p => p.id === 'sthc'));
+  assert.equal(analyze({ ...base, tierChoice: 'Z' }, TODAY).portfolio.tier, 'B');
+});
